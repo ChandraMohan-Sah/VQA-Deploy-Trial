@@ -1,4 +1,3 @@
-# inference.py
 import torch
 from transformers import BartTokenizer, BartForConditionalGeneration
 import os
@@ -6,13 +5,18 @@ import os
 # Load the tokenizer and model (paths may need adjusting based on your setup)
 tokenizer = BartTokenizer.from_pretrained('facebook/bart-base')
 model = BartForConditionalGeneration.from_pretrained('facebook/bart-base')
+
+# Define checkpoint path
 checkpoint_path = os.path.join(os.getcwd(), "final_checkpoint.pth")
 
-# Load your trained model checkpoint
+# Function to load checkpoint
 def load_checkpoint(model, file_path):
-    checkpoint = torch.load(file_path, map_location='cpu')
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Loading checkpoint from {file_path}")
+    checkpoint = torch.load(file_path, map_location=device)
     model.load_state_dict(checkpoint['model_state_dict'])
-    print(f"Checkpoint loaded from {file_path}")
+    print(f"Checkpoint loaded successfully from {file_path}")
+    model.to(device)
 
 # Load checkpoint
 load_checkpoint(model, checkpoint_path)
