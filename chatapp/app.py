@@ -14,27 +14,36 @@ st.title("VQA Chat Assistant")
 st.markdown("""
     <style>
         .chat-container {
-            border: 1px solid #ddd;
+            border: 1px solid #e0e0e0;
             padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            max-width: 700px;
-            margin: auto;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            max-width: 750px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         .user-message, .bot-message {
-            padding: 8px;
-            border-radius: 10px;
-            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 12px;
+            max-width: 80%;
             width: fit-content;
+            font-size: 1rem;
+            line-height: 1.5;
         }
         .user-message {
-            background-color: #dcf8c6;
+            background-color: #dcf8c6; /* Light green for user message */
             align-self: flex-end;
+            color: #333;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
         }
         .bot-message {
-            background-color: #fff;
-            border: 1px solid #eee;
+            background-color: #ffffff; /* White for bot message */
+            border: 1px solid #e0e0e0;
             align-self: flex-start;
+            color: #000; /* Darker color for better readability */
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 """, unsafe_allow_html=True)
@@ -48,7 +57,7 @@ for message in st.session_state["chat_history"]:
     if message["role"] == "user":
         st.markdown(f'<div class="chat-container"><div class="user-message">{message["content"]}</div></div>', unsafe_allow_html=True)
     else:
-        st.markdown(f'<div class="chat-container"><div class="bot-message">{message["content"]}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="chat-container"><div class="bot-message">{message["content"]}</div></div><br>', unsafe_allow_html=True)
 
 # User input form
 with st.form("chat_form", clear_on_submit=True):
