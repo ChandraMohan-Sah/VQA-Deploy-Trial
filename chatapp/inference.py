@@ -5,7 +5,7 @@ from transformers import BartTokenizer, BartForConditionalGeneration
 # Load the tokenizer and model (paths may need adjusting based on your setup)
 tokenizer = BartTokenizer.from_pretrained('facebook/bart-base')
 model = BartForConditionalGeneration.from_pretrained('facebook/bart-base')
-checkpoint_path = 'models/final_checkpoint.pth'
+checkpoint_path = 'final_checkpoint.pth'
 
 # Load your trained model checkpoint
 def load_checkpoint(model, file_path):
